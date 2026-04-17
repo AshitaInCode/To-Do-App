@@ -5,6 +5,7 @@ window.onload = function () {
 
 // Add task function
 function addTask() {
+  console.log("Button Cliked");
   let input = document.getElementById("taskInput");
   let task = input.value;
 
@@ -13,25 +14,25 @@ function addTask() {
     return;
   }
 
+  // let li = document.createElement(task);
+
+  // li.innerText = task;
+  // //   console.log(li);
+
   createTaskElement(task);
   saveTask(task);
   input.value = "";
+}
 
-  //Task element creation
-  function createTaskElement(task) {
-    let li = document.createElement("li");
-    li.innerText = task;
-  }
+//Task element creation
+function createTaskElement(task) {
+  let li = document.createElement("li");
+  li.innerText = task;
 
   //Complete Toggle
   li.onclick = function () {
     li.classList.toggle("completed");
   };
-
-  // let li = document.createElement(task);
-
-  // li.innerText = task;
-  // //   console.log(li);
 
   // li.onclick = function () {
   //   if (li.style.textDecoration === "line-through") {
@@ -63,27 +64,25 @@ function addTask() {
 function saveTask(task) {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks.push(task);
-  localStorage.setItem("tasks", JSON.Stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 // Load Task
 function loadTask() {
-  function loadTask() {
-    JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks.forEach(function (task) {
-      createTaskElement(task);
-    });
-  }
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.forEach(function (task) {
+    createTaskElement(task);
+  });
 }
 
 //Remove Task
 function removeTask(taskToDelete) {
-  let task = JSON.parse(localStorage.getItem("tasks")) || [];
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks = tasks.filter(function (task) {
     return task !== taskToDelete;
   });
 
-  localStorage.setItems("tasks", JSON.stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 // Enter key Support
